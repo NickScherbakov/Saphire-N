@@ -27,7 +27,7 @@ class OllamaAgent(AgentInterface):
             response = requests.post(
                 f"{self.api_url}/api/generate",
                 json={
-                    "model": "llama2",
+                    "model": "llama3.1",
                     "prompt": f"Analyze the following text and provide insights:\n{data}",
                     "stream": False
                 },
@@ -39,7 +39,7 @@ class OllamaAgent(AgentInterface):
             return {
                 "analysis_result": result.get("response", ""),
                 "confidence": 0.8,
-                "model": "llama2"
+                "model": "llama3.1"
             }
         except requests.exceptions.RequestException as e:
             logger.error(f"Ошибка при запросе к Ollama API: {str(e)}")
