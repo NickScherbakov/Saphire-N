@@ -100,3 +100,12 @@ class OpenAIAssistant:
         except Exception as e:
             logger.error(f"Ошибка при уточнении запроса через OpenAI: {str(e)}")
             raise 
+
+    def _route_request_to_agents(self, task: str) -> Dict[str, str]:
+        # Пример логики маршрутизации
+        if 'анализ' in task:
+            result = self.ollama_agent.analyze(task)
+            return {'OllamaAgent': result}
+        else:
+            result = self.gigachat_agent.create_report(task)
+            return {'GigaChatAgent': result} 
