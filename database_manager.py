@@ -1,9 +1,12 @@
 import sqlite3
-from typing import Any
+from typing import Any, Dict
+from pathlib import Path
 import json
+from datetime import datetime
 
 class DatabaseManager:
     def __init__(self, db_path: str = "saphire.db"):
+        """Инициализация менеджера базы данных"""
         self.db_path = db_path
         self._initialize_database()
     
@@ -122,7 +125,7 @@ class DatabaseManager:
         
         conn.commit()
         conn.close()
-
+    
     def get_conversation_history(self, conversation_id: int) -> list:
         """Получение истории разговора"""
         conn = sqlite3.connect(self.db_path)
@@ -148,3 +151,18 @@ class DatabaseManager:
             }
             for row in history
         ]
+    
+    def close_conversation(self, conversation_id: int) -> None:
+        """Закрытие разговора"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute(
+            '''UPDATE model_conversations 
+               SET status = 'completed', end_time = CURRENT_TIMESTAMP 
+               WHERE id = ?''',
+            (conversation_id,)
+        )
+        
+        conn.commit()
+        conn.close()
