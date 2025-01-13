@@ -37,7 +37,7 @@ def test_gigachat_connection():
             print("✅ Подключение установлено")
             
             print("\nОтправка тестового запроса...")
-            response = giga.chat("А это - мы! Твои тестовые тестировщики :-)")
+            response = giga.chat("Расскажи нам про архитектуру 'MOE' ансамблей LLM ")
             
             print("\n✅ Ответ получен:")
             print(response.choices[0].message.content)
