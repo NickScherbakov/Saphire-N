@@ -12,12 +12,12 @@ def test_gigachat_connection():
         # Получаем учетные данные из переменных окружения
         credentials = os.getenv("GIGACHAT_API_KEY")
         base_url = os.getenv("GIGACHAT_API_URL")
-        model = os.getenv("GIGACHAT_MODEL")
+        _model = os.getenv("MYGIGACHAT_MODEL")
         
-        # Логирование переменных окружения
+        # Логирование переменных окружения перед использованием
         print(f"GIGACHAT_API_KEY: {credentials}")
         print(f"GIGACHAT_API_URL: {base_url}")
-        print(f"GIGACHAT_MODEL: {model}")
+        print(f"GIGACHAT_MODEL: {_model}")
         
         if not credentials or not base_url:
             print("❌ Отсутствуют необходимые переменные окружения:")
@@ -32,7 +32,7 @@ def test_gigachat_connection():
             credentials=credentials,
             base_url=base_url,
             verify_ssl_certs=False,
-            model=model
+            model=_model  # Используем значение переменной model из .env
         ) as giga:
             print("✅ Подключение установлено")
             
