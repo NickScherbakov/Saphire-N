@@ -6,6 +6,7 @@ from agents.gigachat_agent import GigaChatAgent
 from utils.logger import logger
 import os
 from dotenv import load_dotenv
+import requests
 
 # Загружаем настройки из .env
 load_dotenv()
